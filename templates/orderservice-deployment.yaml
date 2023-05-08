@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '{{.Values.microservices.OrderService.serviceName}}'
+  labels:
+    app: '{{.Values.microservices.OrderService.serviceName}}'
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: '{{.Values.microservices.OrderService.serviceName}}'
+  template:
+    metadata:
+      labels:
+        app: '{{.Values.microservices.OrderService.serviceName}}'
+    spec:
+      containers:
+      - name: '{{.Values.microservices.OrderService.serviceName}}'
+        image: '{{.Values.microservices.OrderService.dockerImage}}'
+        ports:
+        - containerPort: 0
+        env: []
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
